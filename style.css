@@ -16,6 +16,8 @@ body {
   padding: 100px 10px 50px;
   transition: background-color 0.2s;
   -webkit-transition: background-color 0.2s;
+  -moz-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
 }
 
 /* Background colors */
@@ -53,14 +55,14 @@ small {
 
 h1 {
   font-family: Cabin, sans-serif;
-  font-size: 64px;
   font-weight: 700;
+  font-size: 64px;
   line-height: 69px;
 }
 
 h2 {
-  font-size: 24px;
   font-weight: 400;
+  font-size: 24px;
   line-height: 29px;
 }
 
@@ -70,14 +72,15 @@ h2 {
 }
 
 .state-1 .line-2 {
-  font-size: 60px;
   font-weight: 700;
-  text-transform: none;
+  font-size: 60px;
   line-height: 65px;
+  text-transform: none;
 }
 
 .state-1 .line-2 .hours,
-.state-1 .line-2 .minutes {
+.state-1 .line-2 .minutes,
+.state-1 .line-2 .seconds {
   display: none;
 }
 

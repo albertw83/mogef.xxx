@@ -1,5 +1,24 @@
 var shutdownPeriod = [{h: 15, m: 0}, {h: 21, m: 0}];  // in UTC
 var bgClasses = ['mogef-1', 'mogef-2', 'mogef-3', 'mogef-4'];
+var visited = new Date();
+var deceived;
+
+if (location.hash) {
+  var timeNums = $.map(location.hash.substring(1).split(':'), Number);
+  deceived = new Date(visited.getTime());
+  deceived.setHours(timeNums[0] || 0);
+  deceived.setMinutes(timeNums[1] || 0);
+  deceived.setSeconds(timeNums[2] || 0);
+  deceived.setMilliseconds(0);
+}
+
+function zerozero(num) {
+  return ('00' + num).slice(-2);
+}
+
+$('.opening-time').text(
+  zerozero(shutdownPeriod[0].h) + ':' + zerozero(shutdownPeriod[0].m)
+);
 
 function nextEvent(now) {
   var next = new Date(now.getTime());
@@ -21,43 +40,33 @@ function nextEvent(now) {
   }
 }
 
-function loop(now) {
-  now = now || new Date();
+function loop() {
+  var now = new Date();
+  if (deceived) {
+    now = new Date(deceived.getTime() + (now - visited));
+  }
   var event = nextEvent(now);
+  var will = event[0];
   var next = event[1];
-  event = event[0];
-  if (event == 'shutdown') {
+  if (will == 'shutdown') {
+    var delta = Math.ceil((next - now) / 1000);  // in seconds
     $(document.body).attr('class', null);
     $(document.body).addClass(bgClasses[now.getSeconds() % bgClasses.length]);
-    var delta = (next - now) / 1000;  // in seconds
+    $('.hours')[delta < 3600 ? 'hide' : 'show']();
+    $('.minutes')[delta < 60 ? 'hide' : 'show']();
+    $('.seconds').show();
     var hours = delta / 3600 | 0;
     delta -= hours * 3600;
     var minutes = delta / 60 | 0;
     delta -= minutes * 60;
     var seconds = delta | 0;
-    $.each({hours: hours, minutes: minutes}, function(name, value) {
-      var $elem = $('.' + name);
-      if (value) {
-        $elem.show().find('>').text(value);
-      } else {
-        $elem.hide();
-      }
-    });
+    $('.hours >').text(hours);
+    $('.minutes >').text(minutes);
     $('.seconds >').text(seconds);
   } else {
     $(document.body).addClass('shutdown');
   }
 }
 
-if (location.hash) {
-  var fixed = new Date();
-  var timeNums = $.map(location.hash.substring(1).split(':'), Number);
-  fixed.setHours(timeNums[0] || 0);
-  fixed.setMinutes(timeNums[1] || 0);
-  fixed.setSeconds(timeNums[2] || 0);
-  fixed.setMilliseconds(0);
-  loop(fixed);
-} else {
-  loop();
-  setInterval(loop, 1000);
-}
+loop();
+setInterval(loop, 100);
