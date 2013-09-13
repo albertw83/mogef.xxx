@@ -1,0 +1,102 @@
+@import url(http://fonts.googleapis.com/css?family=Dosis:400,700|Cabin:700);
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1em;
+}
+
+body {
+  color: #fff;
+  font-family: Dosis, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 100px 10px 50px;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+}
+
+/* Background colors */
+
+.mogef-1 { background: #4e9fd7; }
+.mogef-2 { background: #ac1f8d; }
+.mogef-3 { background: #bcbe50; }
+.mogef-4 { background: #5e474a; }
+.shutdown { background: #000; }
+
+/* States */
+
+.state-2, .shutdown .state-1 {
+  display: none;
+}
+
+.shutdown .state-2 {
+  display: block;
+}
+
+/* Typo-graphy */
+
+a:link, a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e24;
+}
+
+small {
+  font-size: 0.5em;
+}
+
+h1 {
+  font-family: Cabin, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 69px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29px;
+}
+
+.state-1 .line-1 {
+  font-size: 48px;
+  line-height: 53px;
+}
+
+.state-1 .line-2 {
+  font-size: 60px;
+  font-weight: 700;
+  text-transform: none;
+  line-height: 65px;
+}
+
+.state-1 .line-2 span {
+  display: none;
+}
+
+.state-1 .line-2 span span {
+  display: inline;
+  font-size: 72px;
+}
+
+.state-2 .line-1 {
+  font-size: 48px;
+  line-height: 53px;
+}
+
+.state-2 .line-2 {
+  font-size: 36px;
+  line-height: 41px;
+}
+
+.state-2 .line-3 {
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 77px;
+}
