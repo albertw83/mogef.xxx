@@ -21,8 +21,8 @@ function nextEvent(now) {
   }
 }
 
-function loop() {
-  var now = new Date();
+function loop(now) {
+  now = now || new Date();
   var event = nextEvent(now);
   var next = event[1];
   event = event[0];
@@ -44,8 +44,20 @@ function loop() {
       }
     });
     $('.seconds >').text(seconds);
+  } else {
+    $(document.body).addClass('shutdown');
   }
 }
 
-loop();
-setInterval(loop, 1000);
+if (location.hash) {
+  var fixed = new Date();
+  var timeNums = $.map(location.hash.substring(1).split(':'), Number);
+  fixed.setHours(timeNums[0] || 0);
+  fixed.setMinutes(timeNums[1] || 0);
+  fixed.setSeconds(timeNums[2] || 0);
+  fixed.setMilliseconds(0);
+  loop(fixed);
+} else {
+  loop();
+  setInterval(loop, 1000);
+}
