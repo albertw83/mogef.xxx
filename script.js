@@ -35,11 +35,7 @@ function loop() {
     var minutes = delta / 60 | 0;
     delta -= minutes * 60;
     var seconds = delta | 0;
-    $.each({
-      hours: hours,
-      minutes: minutes,
-      seconds: seconds
-    }, function(name, value) {
+    $.each({hours: hours, minutes: minutes}, function(name, value) {
       var $elem = $('.' + name);
       if (value) {
         $elem.show().find('>').text(value);
@@ -47,6 +43,7 @@ function loop() {
         $elem.hide();
       }
     });
+    $('.seconds >').text(seconds);
   }
 }
 

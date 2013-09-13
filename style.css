@@ -76,12 +76,12 @@ h2 {
   line-height: 65px;
 }
 
-.state-1 .line-2 span {
+.state-1 .line-2 .hours,
+.state-1 .line-2 .minutes {
   display: none;
 }
 
 .state-1 .line-2 span span {
-  display: inline;
   font-size: 72px;
 }
 
