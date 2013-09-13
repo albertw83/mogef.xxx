@@ -14,8 +14,8 @@ body {
   text-transform: uppercase;
   text-align: center;
   padding: 100px 10px 50px;
-  transition-property: background-color;
-  transition-duration: 0.2s;
+  transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
 }
 
 /* Background colors */
