@@ -2,6 +2,7 @@ var shutdownPeriod = [{h: 15, m: 0}, {h: 21, m: 0}];  // in UTC
 var bgClasses = ['mogef-1', 'mogef-2', 'mogef-3', 'mogef-4'];
 var visited = new Date();
 var deceived;
+var $body = $(document.body);
 
 if (location.hash) {
   var timeNums = $.map(location.hash.substring(1).split(':'), Number);
@@ -50,8 +51,9 @@ function loop() {
   var next = event[1];
   if (will == 'shutdown') {
     var delta = Math.ceil((next - now) / 1000);  // in seconds
-    $(document.body).attr('class', null);
-    $(document.body).addClass(bgClasses[now.getSeconds() % bgClasses.length]);
+    $body.attr('class', null);
+    $body.removeClass('shutdown').addClass('release');
+    $body.addClass(bgClasses[now.getSeconds() % bgClasses.length]);
     $('.hours')[delta < 3600 ? 'hide' : 'show']();
     $('.minutes')[delta < 60 ? 'hide' : 'show']();
     $('.seconds').show();
@@ -64,9 +66,10 @@ function loop() {
     $('.minutes >').text(minutes);
     $('.seconds >').text(seconds);
   } else {
-    $(document.body).addClass('shutdown');
+    $body.removeClass('release').addClass('shutdown');
   }
+  $body.css('transition', 'background-color 0.2s');
 }
 
 loop();
-setInterval(loop, 100);
+setInterval(loop, 500);

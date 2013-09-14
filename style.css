@@ -8,16 +8,13 @@
 }
 
 body {
+  background: #999;
   color: #fff;
   font-family: Dosis, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
   padding: 100px 10px 50px;
-  transition: background-color 0.2s;
-  -webkit-transition: background-color 0.2s;
-  -moz-transition: background-color 0.2s;
-  -o-transition: background-color 0.2s;
 }
 
 /* Background colors */
@@ -30,11 +27,11 @@ body {
 
 /* States */
 
-.state-2, .shutdown .state-1 {
+section {
   display: none;
 }
 
-.shutdown .state-2 {
+.release .state-1, .shutdown .state-2 {
   display: block;
 }
 
